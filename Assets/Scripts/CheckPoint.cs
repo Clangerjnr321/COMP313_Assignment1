@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private GameMaster gameMaster;
+    void Start(){
+        gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+    }
+    // Start is called before the first frame update
+    void OnTriggerEnter(Collider other){
+        if(other.transform.tag == "Player"){
+            gameMaster.lastCheckpointPos = transform.position;
+        }
     }
 }

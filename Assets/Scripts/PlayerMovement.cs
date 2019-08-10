@@ -14,18 +14,20 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
 
     private Vector3 spawn;
+    private GameMaster gameMaster;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        transform.position = gameMaster.lastCheckpointPos;
+
         Debug.Log("Hello Josh");
         moveSpeed = 4.0f;
         jumpForce = 2.4f;
 
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
-
-        spawn = transform.position;
     }
 
 
@@ -54,11 +56,16 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision){
         if(collision.transform.tag == "Respawn"){
+            spawn = gameMaster.lastCheckpointPos;
             transform.position = spawn;
         }
 
         if(collision.transform.tag == "Finish"){
             print("You have completed the game");
+        }
+
+        if(collision.transform.tag == "Checkpoint"){
+            gameMaster.lastCheckpointPos = transform.position;
         }
     }
 }
