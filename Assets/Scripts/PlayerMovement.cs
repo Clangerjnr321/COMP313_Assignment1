@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,11 +17,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 spawn;
     private GameMaster gameMaster;
 
+    public Vector3 startingPos;
+
     // Start is called before the first frame update
     void Start()
     {
         gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-        transform.position = gameMaster.lastCheckpointPos;
+        transform.position = startingPos;
+        gameMaster.lastCheckpointPos = startingPos;
 
         Debug.Log("Hello Josh");
         moveSpeed = 4.0f;
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(collision.transform.tag == "Finish"){
-            print("You have completed the game");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         if(collision.transform.tag == "Checkpoint"){
