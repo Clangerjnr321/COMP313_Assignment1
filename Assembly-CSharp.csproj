@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CheckPoint.cs" />
+     <Compile Include="Assets\Scripts\ColorShift.cs" />
+     <Compile Include="Assets\Scripts\Controller.cs" />
      <Compile Include="Assets\Scripts\FinishGame.cs" />
      <Compile Include="Assets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\Scripts\GameMaster.cs" />
