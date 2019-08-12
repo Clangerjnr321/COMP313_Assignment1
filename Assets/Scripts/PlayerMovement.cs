@@ -50,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
 
       transform.Translate(moveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime, 0f, moveSpeed * Input.GetAxis("Vertical") * Time.deltaTime);
 
+      if(transform.position.y < -1f)
+      {
+        spawn = gameMaster.lastCheckpointPos;
+        transform.position = spawn;
+      }
 
       if(Input.GetKeyDown(KeyCode.Space) && isGrounded){
         rb.AddForce(jump * jumpForce, ForceMode.Impulse);
